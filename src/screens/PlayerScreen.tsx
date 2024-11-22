@@ -1,5 +1,7 @@
 import React from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Container,
   Title,
@@ -7,19 +9,17 @@ import {
   TimelineProgress,
   ControlsContainer,
   ControlButton,
-  PlayButton,
   SpeedControl,
-  DurationText,
 } from '../styles/PlayerScreen.styles';
 import TrackPlayer from 'react-native-track-player';
+import CloseButton from '../components/CloseButton';
+import { useNavigation } from '@react-navigation/native';
 
-type PlayerScreenRouteProp = RouteProp<
-  { PlayerScreen: { title: string } },
-  'PlayerScreen'
->;
+type PlayerScreenRouteProp = RouteProp<{ PlayerScreen: { title: string } }, 'PlayerScreen'>;
 
 const PlayerScreen = () => {
   const route = useRoute<PlayerScreenRouteProp>();
+  const navigation = useNavigation();
   const { title } = route.params;
 
   const playMusic = async () => {
@@ -38,34 +38,37 @@ const PlayerScreen = () => {
       ]);
       await TrackPlayer.play();
     } catch (error) {
-      ;
-      
+      console.error(error);
     }
   };
 
-  const provisionalImage =
-    'https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+  const stopMusic = async () => {
+    try {
+      await TrackPlayer.stop();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <Container>
-      
-      <Title>{title}</Title>
-      <Timeline>
-        <TimelineProgress />
-      </Timeline>
-      <ControlsContainer>
-        <ControlButton>
-          
-        </ControlButton>
-        <PlayButton onPress={playMusic}>
-          <DurationText>▶</DurationText>
-        </PlayButton>
-        <ControlButton>
-          
-        </ControlButton>
-      </ControlsContainer>
-      <SpeedControl>1x</SpeedControl>
-    </Container>
+    <View style={{ flex: 1 }}>
+      <CloseButton onPress={() => navigation.goBack()} />
+      <Container>
+        <Title>{title}</Title>
+        <Timeline>
+          <TimelineProgress />
+        </Timeline>
+        <ControlsContainer>
+          <ControlButton onPress={playMusic}>
+            <Icon name="play" size={30} color="#fff" />
+          </ControlButton>
+          <ControlButton onPress={stopMusic}>
+            <Icon name="stop" size={30} color="#fff" />
+          </ControlButton>
+        </ControlsContainer>
+        <SpeedControl>1x</SpeedControl>
+      </Container>
+    </View>
   );
 };
 

@@ -35,7 +35,7 @@ const GET_ITEMS = gql`
 `;
 
 const CategoryMenu = ({ selectedCategory, onCategorySelect }: CategoryMenuProps) => {
-  const {data } = useQuery(GET_ITEMS);
+  const { loading, error, data } = useQuery(GET_ITEMS);
   const [filteredItems, setFilteredItems] = useState<any[]>([]);
   const navigation = useNavigation();
   const provisionalImage = 'https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
@@ -50,9 +50,11 @@ const CategoryMenu = ({ selectedCategory, onCategorySelect }: CategoryMenuProps)
     }
   }, [data, selectedCategory]);
 
+  if (loading) return <Text>Cargando...</Text>;
+  if (error) return <Text>Error al cargar los items: {error.message}</Text>;
 
   const categories = [
-    { id: 'all', title: 'All' }, 
+    { id: 'all', title: 'Todos' }, 
     ...Array.from(new Set(data.items.map((item: any) => item.category.id)))
       .map((id) => {
         return data.items.find((item: any) => item.category.id === id)?.category;

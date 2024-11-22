@@ -23,6 +23,7 @@
     "react-native-screens": "^4.3.0",
     "react-native-stack": "^1.0.0-alpha11",
     "react-native-track-player": "^4.1.1",
+    "react-native-vector-icons": "^10.2.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

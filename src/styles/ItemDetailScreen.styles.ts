@@ -7,6 +7,7 @@ export const Container = styled.ScrollView`
 `;
 
 export const Title = styled.Text`
+ margin-top: 90px;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 8px;

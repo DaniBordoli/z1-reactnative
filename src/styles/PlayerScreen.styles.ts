@@ -45,11 +45,14 @@ export const ControlsContainer = styled(View)`
   margin: 20px 0;
 `;
 
-export const ControlButton = styled(TouchableOpacity)`
+export const ControlButton = styled.TouchableOpacity`
   width: 50px;
   height: 50px;
   justify-content: center;
   align-items: center;
+  margin: 0 10px;
+  background-color: #4c1c78;
+  border-radius: 25px;
 `;
 
 export const PlayButton = styled(TouchableOpacity)`

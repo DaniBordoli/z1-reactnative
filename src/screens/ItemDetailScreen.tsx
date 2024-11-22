@@ -1,7 +1,16 @@
 import React from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import { Container, Image, Title, Author, Content, StyledButton, ButtonText } from '../styles/ItemDetailScreen.styles';
+import {
+  Container,
+  Image,
+  Title,
+  Author,
+  Content,
+  StyledButton,
+  ButtonText,
+} from '../styles/ItemDetailScreen.styles';
+import CloseButton from '../components/CloseButton';
 
 type ItemDetailScreenRouteProp = RouteProp<
   { ItemDetailScreen: { itemId: string; title: string; image: string; author: string; content: string } },
@@ -14,9 +23,9 @@ const ItemDetailScreen = () => {
   const navigation = useNavigation();
   const provisionalImage = 'https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
-
   return (
     <Container>
+      <CloseButton onPress={() => navigation.goBack()} />
       <Title>{title}</Title>
       <Author>{author}</Author>
       {image && (
@@ -28,7 +37,7 @@ const ItemDetailScreen = () => {
       <Content>{content}</Content>
       <StyledButton
         onPress={() =>
-          navigation.navigate('PlayerScreen', { title, author, })
+          navigation.navigate('PlayerScreen', { title, author })
         }
       >
         <ButtonText>Abrir Reproductor</ButtonText>
