@@ -23,20 +23,6 @@ export const Title = styled(Text)`
   margin-top: 20px;
 `;
 
-export const Timeline = styled(View)`
-  width: 90%;
-  height: 5px;
-  background-color: #555;
-  border-radius: 10px;
-  margin: 20px 0;
-`;
-
-export const TimelineProgress = styled(View)`
-  width: 40%;
-  height: 100%;
-  background-color: #ffac33;
-  border-radius: 10px;
-`;
 
 export const ControlsContainer = styled(View)`
   flex-direction: row;
@@ -56,7 +42,7 @@ export const ControlButton = styled.TouchableOpacity`
 `;
 
 export const PlayButton = styled(TouchableOpacity)`
-  background-color: #532a63;
+  background-color: #4c1c78;
   width: 70px;
   height: 70px;
   border-radius: 35px;
@@ -64,6 +50,7 @@ export const PlayButton = styled(TouchableOpacity)`
   align-items: center;
   margin: 0 20px;
 `;
+
 
 export const DurationText = styled(Text)`
   font-size: 16px;
