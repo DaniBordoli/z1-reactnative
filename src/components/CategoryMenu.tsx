@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, TouchableOpacity, Text, View } from 'react-native';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useNavigation } from '@react-navigation/native';
 import {
   StyledScrollView,
@@ -12,27 +12,12 @@ import {
   ItemAuthor,
   TextContainer,
 } from '../styles/CategoryMenu.styles';
+import { GET_ITEMS } from '../api/item'; 
 
 type CategoryMenuProps = {
   selectedCategory: string | null;
   onCategorySelect: (categoryId: string) => void;
 };
-
-const GET_ITEMS = gql`
-  query GetItems {
-    items {
-      id
-      title
-      image
-      author
-      content
-      category {
-        id
-        title
-      }
-    }
-  }
-`;
 
 const CategoryMenu = ({ selectedCategory, onCategorySelect }: CategoryMenuProps) => {
   const { data } = useQuery(GET_ITEMS);
@@ -41,7 +26,7 @@ const CategoryMenu = ({ selectedCategory, onCategorySelect }: CategoryMenuProps)
   const provisionalImage = 'https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
   useEffect(() => {
-    if (data) {
+    if (data?.items) {
       const filtered =
         selectedCategory && selectedCategory !== 'all'
           ? data.items.filter((item: any) => item.category.id === selectedCategory)
@@ -50,15 +35,14 @@ const CategoryMenu = ({ selectedCategory, onCategorySelect }: CategoryMenuProps)
     }
   }, [data, selectedCategory]);
 
-
-  const categories = [
-    { id: 'all', title: 'Todos' }, 
-    ...Array.from(new Set(data.items.map((item: any) => item.category.id)))
-      .map((id) => {
-        return data.items.find((item: any) => item.category.id === id)?.category;
-      })
-      .filter(Boolean),
-  ];
+  const categories = data?.items
+    ? [
+        { id: 'all', title: 'Todos' },
+        ...Array.from(new Set(data.items.map((item: any) => item.category.id)))
+          .map((id) => data.items.find((item: any) => item.category.id === id)?.category)
+          .filter(Boolean),
+      ]
+    : [];
 
   return (
     <View style={{ flex: 1 }}>
