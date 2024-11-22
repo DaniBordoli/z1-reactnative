@@ -28,7 +28,7 @@ const ItemDetailScreen = () => {
       <Content>{content}</Content>
       <StyledButton
         onPress={() =>
-          navigation.navigate('PlayerScreen', { title, author })
+          navigation.navigate('PlayerScreen', { title, author, })
         }
       >
         <ButtonText>Abrir Reproductor</ButtonText>
