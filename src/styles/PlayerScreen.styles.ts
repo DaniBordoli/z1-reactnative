@@ -63,4 +63,14 @@ export const SpeedControl = styled(Text)`
   margin-bottom: 10px;
 `;
 
+export const TimeContainer = styled(View)`
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+`;
 
+export const TimeText = styled(Text)`
+  color: #fff;
+  font-size: 12px;
+  margin-right: 20px;
+`;

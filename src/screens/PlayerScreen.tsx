@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Slider from '@react-native-community/slider';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
@@ -11,6 +11,8 @@ import {
   ControlButton,
   PlayButton,
   SpeedControl,
+  TimeContainer,
+  TimeText
 } from '../styles/PlayerScreen.styles';
 import CloseButton from '../components/CloseButton';
 import { useNavigation } from '@react-navigation/native';
@@ -59,6 +61,12 @@ const PlayerScreen = () => {
     await TrackPlayer.seekTo(newPosition < 0 ? 0 : newPosition > duration ? duration : newPosition);
   };
 
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <CloseButton onPress={() => navigation.goBack()} />
@@ -74,6 +82,11 @@ const PlayerScreen = () => {
           minimumTrackTintColor="#1DB954"
           maximumTrackTintColor="#ccc"
         />
+        <TimeContainer>
+          <TimeText>
+            {formatTime(position)} / {formatTime(duration)}
+          </TimeText>
+        </TimeContainer>
         <ControlsContainer>
           <ControlButton onPress={() => skipTime(-10)}>
             <Icon name="undo" size={30} color="#fff" />
