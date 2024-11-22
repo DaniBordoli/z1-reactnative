@@ -6,6 +6,7 @@ import ItemListScreen from './src/screens/ItemListScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
+import PlayerScreen from './src/screens/PlayerScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,21 +27,26 @@ const App = () => {
 
   return (
     <NavigationContainer>
-    <ApolloProvider client={client}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="ItemListScreen"
-          component={ItemListScreen}
-          options={{ headerShown: false }}
-        />
-            <Stack.Screen
+      <ApolloProvider client={client}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="ItemListScreen"
+            component={ItemListScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="ItemDetailScreen"
             component={ItemDetailScreen}
             options={{ headerShown: false }}
           />
-      </Stack.Navigator>
-    </ApolloProvider>
-  </NavigationContainer>
+          <Stack.Screen
+            name="PlayerScreen"
+            component={PlayerScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </ApolloProvider>
+    </NavigationContainer>
   );
 };
 
