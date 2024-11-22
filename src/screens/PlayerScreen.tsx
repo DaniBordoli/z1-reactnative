@@ -76,13 +76,19 @@ const PlayerScreen = () => {
         />
         <ControlsContainer>
           <ControlButton onPress={() => skipTime(-10)}>
-            <Icon name="backward" size={30} color="#fff" />
+            <Icon name="undo" size={30} color="#fff" />
+            <View style={{ position: 'absolute', bottom: -20 }}>
+              <Title style={{ fontSize: 12 }}>10s</Title>
+            </View>
           </ControlButton>
           <PlayButton onPress={playMusic}>
             <Icon name={isPlaying ? 'pause' : 'play'} size={30} color="#fff" />
           </PlayButton>
           <ControlButton onPress={() => skipTime(10)}>
-            <Icon name="forward" size={30} color="#fff" />
+            <Icon name="repeat" size={30} color="#fff" />
+            <View style={{ position: 'absolute', bottom: -20 }}>
+              <Title style={{ fontSize: 12 }}>10s</Title>
+            </View>
           </ControlButton>
         </ControlsContainer>
         <SpeedControl>1x</SpeedControl>
