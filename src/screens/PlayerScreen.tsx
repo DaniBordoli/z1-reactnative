@@ -38,7 +38,7 @@ const PlayerScreen = () => {
       ]);
       await TrackPlayer.play();
     } catch (error) {
-      console.log('Error:', error);
+      ;
       
     }
   };

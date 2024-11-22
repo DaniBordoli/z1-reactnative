@@ -19,9 +19,9 @@ const App = () => {
   const setupPlayer = async () => {
     try {
       await TrackPlayer.setupPlayer();
-      console.log("track player funcionando");
+     
     } catch (error) {
-      console.error("ERROR:", error);
+      
     }
   };
 
